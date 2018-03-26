@@ -5,6 +5,8 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: "^0.4.0"
+  image_picker: "^0.3.1"
+  shared_preferences: "^0.4.0"
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +28,8 @@ flutter:
   assets:
    - res/me.jpg
    - res/tasks_list.txt
+   - res/mountains.jpg
+   - res/forest.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

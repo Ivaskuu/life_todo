@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../misc/mycolors.dart';
 import '../../misc/io_manager.dart';
+import '../../misc/tasks_list.dart';
+import '../../user.dart';
 
 import 'progress_bar.dart';
 import 'tasks_section.dart';
+
+import 'dart:io';
 
 class TodoListPage extends StatefulWidget
 {
@@ -27,6 +31,12 @@ class TodoListPageState extends State<TodoListPage>
 
     controller.addListener(()
     {
+      if(controller.offset == 0.0)
+      {
+        setState(() { widget.showSmallProgressBar = false; });
+        print(controller.offset);
+      }
+
       if(widget.resetState)
       {
         setState(() {});
@@ -50,9 +60,8 @@ class TodoListPageState extends State<TodoListPage>
           new SliverAppBar
           (
             elevation: 3.0,
-            floating: true,
+            floating: false,
             pinned: true,
-            snap: false,
             centerTitle: false,
             backgroundColor: Colors.white,
             titleSpacing: 0.0,
@@ -83,7 +92,7 @@ class TodoListPageState extends State<TodoListPage>
                       (
                         radius: 22.0,
                         backgroundColor: Colors.white,
-                        backgroundImage: new AssetImage('res/me.jpg'),
+                        backgroundImage: new FileImage(new File(User.userImagePath)) ?? new AssetImage('res/me.jpg'),
                       ),
                     )
                   ),
@@ -93,7 +102,7 @@ class TodoListPageState extends State<TodoListPage>
                   alignment: FractionalOffset.bottomLeft,
                   child: new SizedBox.fromSize
                   (
-                    size: new Size(MediaQuery.of(context).size.width / 2.0, 4.0),
+                    size: new Size((User.completedTasks.length / TasksList.tasks.length) * MediaQuery.of(context).size.width, 4.0),
                     child: new Container(color: MyColors.blue),
                   )
                 ) : new Container(),

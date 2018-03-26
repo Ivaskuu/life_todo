@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'pages/todo_list_page/todo_list_page.dart';
+import 'pages/login_page.dart';
+import 'user.dart';
 
-void main() => runApp(new MyApp());
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() async
+{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if(prefs.getString('userName') != null) User.name = prefs.getString('userName');
+  if(prefs.getString('userImage') != null) User.userImagePath = prefs.getString('userImage');
+  
+  User.prefs = prefs;
+
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget
 {
@@ -15,7 +28,7 @@ class MyApp extends StatelessWidget
       (
         primarySwatch: Colors.blue,
       ),
-      home: new TodoListPage(),
+      home: User.name != null ? new TodoListPage() : new LoginPage(),
     );
   }
 }

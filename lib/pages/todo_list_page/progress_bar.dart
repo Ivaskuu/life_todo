@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../misc/mycolors.dart';
+import '../../misc/tasks_list.dart';
 import 'todo_list_page.dart';
+import '../../user.dart';
 
 class ProgressBar extends StatefulWidget
 {
@@ -46,9 +48,9 @@ class _ProgressBarState extends State<ProgressBar>
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>
                 [
-                  new Text('29', style: new TextStyle(color: MyColors.blue, fontWeight: FontWeight.w600)),
+                  new Text(User.completedTasks.length.toString(), style: new TextStyle(color: MyColors.blue, fontWeight: FontWeight.w700)),
                   new Text('/'),
-                  new Text('66', style: new TextStyle(fontWeight: FontWeight.w500)),
+                  new Text(TasksList.tasks.length.toString(), style: new TextStyle(fontWeight: FontWeight.w500)),
                 ],
               )
             ],
@@ -69,7 +71,7 @@ class _ProgressBarState extends State<ProgressBar>
               ),
               new SizedBox.fromSize
               (
-                size: new Size(120.0, 50.0),
+                size: new Size((User.completedTasks.length / TasksList.tasks.length) * MediaQuery.of(context).size.width - (((User.completedTasks.length / TasksList.tasks.length) * MediaQuery.of(context).size.width) * 0.1), 50.0),
                 child: new Material
                 (
                   color: MyColors.blue,

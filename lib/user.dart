@@ -1,9 +1,13 @@
 import 'logic/task.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class User
 {
-  static String name = 'Francesco';
+  static String name;
+  static String userImagePath;
   static List<Task> completedTasks = new List();
+
+  static SharedPreferences prefs;
 
   static void removeTask(String taskDesc)
   {
