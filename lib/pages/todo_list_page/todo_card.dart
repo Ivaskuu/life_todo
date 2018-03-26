@@ -7,7 +7,8 @@ import '../../user.dart';
 class TodoCard extends StatefulWidget
 {
   Task task;
-  TodoCard(this.task);
+  State state;
+  TodoCard(this.task, this.state);
 
   @override
   _TodoCardState createState() => new _TodoCardState();
@@ -38,6 +39,7 @@ class _TodoCardState extends State<TodoCard>
               else User.removeTask(widget.task.description);
 
               IOManager.saveCompletedTasks();
+              widget.state.setState(() {});
             },
             child: new Container
             (
@@ -116,6 +118,7 @@ class _TodoCardState extends State<TodoCard>
                           else User.removeTask(widget.task.description);
 
                           IOManager.saveCompletedTasks();
+                          widget.state.setState(() {});
                         },
                         activeColor: MyColors.blue,
                         value: widget.task.done,

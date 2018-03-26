@@ -6,6 +6,9 @@ import 'todo_card.dart';
 
 class TasksSection extends StatefulWidget
 {
+  State state;
+  TasksSection(this.state);
+
   @override
   _TasksSectionState createState() => new _TasksSectionState();
 }
@@ -19,7 +22,7 @@ class _TasksSectionState extends State<TasksSection>
     (
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: TasksList.tasks.map<Widget>((Task task) => new TodoCard(checkIfDone(task))).toList()
+      children: TasksList.tasks.map<Widget>((Task task) => new TodoCard(checkIfDone(task), widget.state)).toList()
     );
   }
 

@@ -7,7 +7,8 @@ import '../../user.dart';
 import 'progress_bar.dart';
 import 'tasks_section.dart';
 
-import 'dart:io';
+import '../../misc/user_image.dart';
+import '../menu_page.dart';
 
 class TodoListPage extends StatefulWidget
 {
@@ -59,6 +60,7 @@ class TodoListPageState extends State<TodoListPage>
         [
           new SliverAppBar
           (
+            automaticallyImplyLeading: false,
             elevation: 3.0,
             floating: false,
             pinned: true,
@@ -92,7 +94,11 @@ class TodoListPageState extends State<TodoListPage>
                       (
                         radius: 22.0,
                         backgroundColor: Colors.white,
-                        backgroundImage: new FileImage(new File(User.userImagePath)) ?? new AssetImage('res/me.jpg'),
+                        child: new InkWell
+                        (
+                          onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (_) => new MenuPage())),
+                          child: new UserImage()
+                        )
                       ),
                     )
                   ),
@@ -129,7 +135,7 @@ class TodoListPageState extends State<TodoListPage>
                   margin: new EdgeInsets.only(right: 18.0, bottom: 8.0, top: 16.0),
                   child: new Text('Tasks list', textAlign: TextAlign.end, style: new TextStyle(fontWeight: FontWeight.w500)),
                 ),
-                new TasksSection()
+                new TasksSection(this)
               ]
             )
           )

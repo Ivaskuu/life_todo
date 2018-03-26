@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'todo_list_page/todo_list_page.dart';
 
+import '../misc/user_image.dart';
 import '../user.dart';
 import 'dart:io';
 
@@ -87,11 +88,7 @@ class _LoginPageState extends State<LoginPage>
                               [
                                 new Center
                                 (
-                                  child: profileImageFile != null
-                                  ? new Container
-                                  (
-                                    decoration: new BoxDecoration(image: new DecorationImage(image: new FileImage(profileImageFile), fit: BoxFit.cover, alignment: Alignment.center))
-                                  ) : new Image.asset('res/mountains.jpg')
+                                  child: new UserImage()
                                 ),
                                 new Align
                                 (
