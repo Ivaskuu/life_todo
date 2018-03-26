@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../misc/mycolors.dart';
+import '../../misc/io_manager.dart';
 
 import 'progress_bar.dart';
 import 'tasks_section.dart';
@@ -21,6 +22,8 @@ class TodoListPageState extends State<TodoListPage>
   void initState()
   {
     super.initState();
+
+    IOManager.getCompletedTasks().then((_) => setState(() {}));
 
     controller.addListener(()
     {

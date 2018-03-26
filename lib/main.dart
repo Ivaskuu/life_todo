@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'misc/mycolors.dart';
 import 'pages/todo_list_page/todo_list_page.dart';
 
 void main() => runApp(new MyApp());

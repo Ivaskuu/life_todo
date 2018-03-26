@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../misc/io_manager.dart';
 import '../../misc/mycolors.dart';
 import '../../logic/task.dart';
+import '../../user.dart';
 
 class TodoCard extends StatefulWidget
 {
@@ -18,7 +20,7 @@ class _TodoCardState extends State<TodoCard>
   {
     return new Container
     (
-      margin: new EdgeInsets.only(left: 18.0, right: 18.0, bottom: 12.0),
+      margin: new EdgeInsets.only(left: 16.0, right: 16.0, bottom: 12.0),
       child: new Material
       (
         elevation: 2.0,
@@ -28,7 +30,15 @@ class _TodoCardState extends State<TodoCard>
           color: Colors.transparent,
           child: new InkWell
           (
-            onTap: () => setState(() => widget.task.done = !widget.task.done),
+            onTap: ()
+            {
+              setState(() => widget.task.done = !widget.task.done);
+              
+              if(widget.task.done) User.completedTasks.add(widget.task);
+              else User.removeTask(widget.task.description);
+
+              IOManager.saveCompletedTasks();
+            },
             child: new Container
             (
               padding: new EdgeInsets.all(16.0),
@@ -98,7 +108,15 @@ class _TodoCardState extends State<TodoCard>
                       ),
                       new Checkbox
                       (
-                        onChanged: (bool newState) => setState(() => widget.task.done = newState),
+                        onChanged: (bool newState)
+                        {
+                          setState(() => widget.task.done = newState);
+                          
+                          if(newState) User.completedTasks.add(widget.task);
+                          else User.removeTask(widget.task.description);
+
+                          IOManager.saveCompletedTasks();
+                        },
                         activeColor: MyColors.blue,
                         value: widget.task.done,
                       ),

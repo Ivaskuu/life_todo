@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../logic/task.dart';
 import '../../misc/tasks_list.dart';
+import '../../user.dart';
 import 'todo_card.dart';
 
 class TasksSection extends StatefulWidget
@@ -18,7 +19,21 @@ class _TasksSectionState extends State<TasksSection>
     (
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: TasksList.tasks.map<Widget>((Task task) => new TodoCard(task)).toList()
+      children: TasksList.tasks.map<Widget>((Task task) => new TodoCard(checkIfDone(task))).toList()
     );
+  }
+
+  Task checkIfDone(Task task)
+  {
+    for (var i = 0; i < User.completedTasks.length; i++)
+    {
+      if(User.completedTasks[i].description == task.description)
+      {
+        task.done = true;
+        break;
+      }
+    }
+
+    return task;
   }
 }
