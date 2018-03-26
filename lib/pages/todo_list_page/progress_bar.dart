@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../misc/mycolors.dart';
+import 'todo_list_page.dart';
 
 class ProgressBar extends StatefulWidget
 {
+  final TodoListPage listPage;
+  ProgressBar(this.listPage);
+
   @override
   _ProgressBarState createState() => new _ProgressBarState();
 }
@@ -10,11 +14,22 @@ class ProgressBar extends StatefulWidget
 class _ProgressBarState extends State<ProgressBar>
 {
   @override
+  void dispose()
+  {
+    widget.listPage.showSmallProgressBar = true;
+    widget.listPage.resetState = true;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context)
   {
+    widget.listPage.showSmallProgressBar = false;
+    widget.listPage.resetState = true;
+    
     return new Container
     (
-      margin: new EdgeInsets.only(left: 18.0, right: 18.0),
+      padding: new EdgeInsets.only(left: 18.0, right: 18.0, bottom: 20.0),
       child: new Column
       (
         children: <Widget>
