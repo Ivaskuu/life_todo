@@ -77,7 +77,7 @@ class TodoListPageState extends State<TodoListPage>
                   child: new Container
                   (
                     margin: new EdgeInsets.only(left: 16.0),
-                    child: new Text('Life story', style: new TextStyle(color: Colors.black, fontSize: 32.0, fontWeight: FontWeight.w600))
+                    child: new Text('Life todo', style: new TextStyle(color: Colors.black, fontSize: 32.0, fontWeight: FontWeight.w600))
                   ),
                 ),
                 new Align

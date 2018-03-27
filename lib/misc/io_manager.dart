@@ -57,7 +57,7 @@ class IOManager
 
     for (int i = 0; i < tasks.length; i++)
     {
-      if(tasks[i].done == true) tasksToWrite += tasks[i].description;
+      tasksToWrite += tasks[i].description;
       if(i != tasks.length - 1) tasksToWrite += '\n';
     }
 

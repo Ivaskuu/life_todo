@@ -3,6 +3,7 @@ import '../user.dart';
 import 'login_page.dart';
 import '../misc/user_image.dart';
 import '../misc/io_manager.dart';
+import '../misc/tasks_list.dart';
 
 class MenuPage extends StatefulWidget
 {
@@ -25,7 +26,7 @@ class _MenuPageState extends State<MenuPage>
         [
           new Container
           (
-            margin: new EdgeInsets.only(top: 48.0),
+            margin: new EdgeInsets.only(top: 64.0),
             child:   new Row
             (
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +53,7 @@ class _MenuPageState extends State<MenuPage>
                   children: <Widget>
                   [
                     new Text(User.name, style: new TextStyle(fontSize: 32.0, fontWeight: FontWeight.w500)),
-                    new Text(User.completedTasks.length.toString() + ' completed tasks over 69')
+                    new Text(User.completedTasks.length.toString() + ' completed tasks over ' + TasksList.tasks.length.toString())
                   ],
                 )
               ],
@@ -90,6 +91,7 @@ class _MenuPageState extends State<MenuPage>
                       User.userImagePath = null;
                       User.completedTasks = new List();
 
+                      Navigator.of(context).pop();
                       Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (_) => new LoginPage()));
                     },
                     child: new Container

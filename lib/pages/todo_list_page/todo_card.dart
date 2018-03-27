@@ -4,6 +4,8 @@ import '../../misc/mycolors.dart';
 import '../../logic/task.dart';
 import '../../user.dart';
 
+import 'package:share/share.dart';
+
 class TodoCard extends StatefulWidget
 {
   Task task;
@@ -62,6 +64,18 @@ class _TodoCardState extends State<TodoCard>
                       (
                         child: new Text(widget.task.emoji, style: new TextStyle(fontSize: 28.0)),
                       ),
+                      // Share button
+                      widget.task.done
+                      ? new InkWell
+                      (
+                        onTap: () => share(User.name + ' has completed ' + widget.task.description + ' in Life Todo!'),
+                        child: new Container
+                        (
+                          margin: new EdgeInsets.only(right: 12.0),
+                          child: new Icon(Icons.share, color: Colors.white, size: 22.0),
+                        )
+                      )
+                      : new Container()
                       /*new Expanded
                       (
                         child: new Container
@@ -102,7 +116,7 @@ class _TodoCardState extends State<TodoCard>
                       /// Task description
                       new Flexible
                       (
-                        child:   new Text
+                        child: new Text
                         (
                           widget.task.description.endsWith('.') ?  widget.task.description :  widget.task.description + '.',
                           style: new TextStyle(color: widget.task.done ? Colors.white : Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500)

@@ -11,6 +11,6 @@ class UserImage extends StatelessWidget
     ? new Container
     (
       decoration: new BoxDecoration(image: new DecorationImage(image: new FileImage(new File(User.userImagePath)), fit: BoxFit.cover, alignment: Alignment.center))
-    ) : new Container(decoration: new BoxDecoration(image: new DecorationImage(image: new AssetImage('res/mountains.jpg'), fit: BoxFit.cover, alignment: Alignment.center)));
+    ) : new Container(decoration: new BoxDecoration(image: new DecorationImage(image: new AssetImage('res/user.png'), fit: BoxFit.cover, alignment: Alignment.center)));
   }
 }
