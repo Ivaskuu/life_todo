@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lifetodo">
+    package="com.skuu.lifetodo">
 
     <!-- The INTERNET permission is required for development. Specifically,
          flutter needs it to communicate with the running application
@@ -16,7 +16,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Life todo"
+        android:label="Life Todo"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

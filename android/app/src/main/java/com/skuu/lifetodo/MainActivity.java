@@ -1,4 +1,4 @@
-package com.example.lifetodo;
+package com.skuu.lifetodo;
 
 import android.os.Bundle;
 
