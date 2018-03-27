@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/todo_list_page/todo_list_page.dart';
-import 'pages/login_page.dart';
+import 'pages/onboard_page.dart';
 import 'user.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget
       (
         primarySwatch: Colors.blue,
       ),
-      home: User.name != null ? new TodoListPage() : new LoginPage(),
+      home: User.name != null ? new TodoListPage() : new OnboardPage(),
     );
   }
 }

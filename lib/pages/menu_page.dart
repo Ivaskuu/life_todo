@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../user.dart';
-import 'login_page.dart';
+import 'onboard_page.dart';
 import '../misc/user_image.dart';
 import '../misc/io_manager.dart';
 import '../misc/tasks_list.dart';
@@ -92,7 +92,7 @@ class _MenuPageState extends State<MenuPage>
                       User.completedTasks = new List();
 
                       Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (_) => new LoginPage()));
+                      Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (_) => new OnboardPage()));
                     },
                     child: new Container
                     (
