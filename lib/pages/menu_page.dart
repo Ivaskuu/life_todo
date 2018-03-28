@@ -24,87 +24,109 @@ class _MenuPageState extends State<MenuPage>
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>
         [
-          new Container
+          new Column
           (
-            margin: new EdgeInsets.only(top: 64.0),
-            child:   new Row
-            (
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>
-              [
-                new Material
-                (
-                  color: Colors.transparent,
-                  elevation: 6.0,
-                  shape: new CircleBorder(),
-                  child: new CircleAvatar
-                  (
-                    radius: 32.0,
-                    backgroundColor: Colors.white,
-                    child: new UserImage(),
-                  ),
-                ),
-                new Padding(padding: new EdgeInsets.only(right: 32.0)),
-                new Column
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>
+            [
+              /// Profile infos
+              new Container
+              (
+                margin: new EdgeInsets.only(top: 48.0),
+                child: new Row
                 (
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>
                   [
-                    new Text(User.name, style: new TextStyle(fontSize: 32.0, fontWeight: FontWeight.w500)),
-                    new Text(User.completedTasks.length.toString() + ' completed tasks over ' + TasksList.tasks.length.toString())
+                    new Material
+                    (
+                      color: Colors.transparent,
+                      elevation: 6.0,
+                      shape: new CircleBorder(),
+                      child: new CircleAvatar
+                      (
+                        radius: 32.0,
+                        backgroundColor: Colors.white,
+                        child: new UserImage(),
+                      ),
+                    ),
+                    new Padding(padding: new EdgeInsets.only(right: 32.0)),
+                    new Column
+                    (
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>
+                      [
+                        new Text(User.name, style: new TextStyle(fontSize: 32.0, fontWeight: FontWeight.w500)),
+                        new Text(User.completedTasks.length.toString() + ' completed tasks over ' + TasksList.tasks.length.toString())
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              /// Menu buttons
+              new Padding(padding: new EdgeInsets.only(top: 48.0)),
+              new FlatButton
+              (
+                //onPressed: () { },
+                child: new ListTile
+                (
+                  title: new Text("My friends", style: new TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.0)),
+                  leading: new Icon(Icons.people, ),
+                ),
+              ),
+              new FlatButton
+              (
+                onPressed: () {  },
+                child: new ListTile
+                (
+                  title: new Text("About", style: new TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0)),
+                  leading: new Icon(Icons.info,),
+                ),
+              ),
+            ],
           ),
           new Container
           (
-            margin: new EdgeInsets.only(bottom: 32.0),
-            child: new Material
+            margin: new EdgeInsets.only(bottom: 32.0, left: 32.0, right: 32.0),
+            child: new RaisedButton
             (
-              elevation: 4.0,
-              child: new Container
+              color: Colors.white,
+              onPressed: () async
+              {
+                User.prefs.setString('userName', null);
+                User.prefs.setString('userImage', null);
+                await User.prefs.commit();
+
+                IOManager.saveCompletedTasks();
+                User.userImagePath = null;
+                User.completedTasks = new List();
+
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (_) => new OnboardPage()));
+              },
+              child: new ListTile
               (
-                decoration: new BoxDecoration
-                (
-                  gradient: new LinearGradient
-                  (
-                    colors: [ Colors.yellow, Colors.red ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight
-                  )
-                ),
-                child: new Material
-                (
-                  color: Colors.transparent,
-                  child: new InkWell
-                  (
-                    onTap: () async
-                    {
-                      User.prefs.setString('userName', null);
-                      User.prefs.setString('userImage', null);
-                      await User.prefs.commit();
-
-                      IOManager.saveCompletedTasks();
-                      User.userImagePath = null;
-                      User.completedTasks = new List();
-
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (_) => new OnboardPage()));
-                    },
-                    child: new Container
-                    (
-                      margin: new EdgeInsets.symmetric(horizontal: 52.0, vertical: 16.0),
-                      child: new Text('SIGN OUT', style: new TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.white)),
-                    )
-                  ),
-                ),
-              ),
+                title: new Text("LOGOUT", style: new TextStyle(color: Colors.blueAccent)),
+                trailing: new Icon(Icons.exit_to_app, color: Colors.blueAccent),
+              )
             )
-          ),
+          )
         ],
+      )
+    );
+  }
+
+  Widget menuButton(String title)
+  {
+    return new InkWell
+    (
+      onTap: () {},
+      child: new ListTile
+      (
+        title: new Text(title, style: new TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 32.0)),
       )
     );
   }
