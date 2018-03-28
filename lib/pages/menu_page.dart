@@ -98,6 +98,7 @@ class _MenuPageState extends State<MenuPage>
               {
                 User.prefs.setString('userName', null);
                 User.prefs.setString('userImage', null);
+                User.prefs.setBool('rateDialog', null);
                 await User.prefs.commit();
 
                 IOManager.saveCompletedTasks();

@@ -4,6 +4,7 @@ import '../../misc/io_manager.dart';
 import '../../misc/tasks_list.dart';
 import '../../user.dart';
 
+import 'rate_dialog.dart';
 import 'progress_bar.dart';
 import 'tasks_section.dart';
 
@@ -14,6 +15,7 @@ class TodoListPage extends StatefulWidget
 {
   bool showSmallProgressBar = false;
   bool resetState = false;
+  bool showRateDialog = false;
 
   @override
   TodoListPageState createState() => new TodoListPageState();
@@ -29,6 +31,7 @@ class TodoListPageState extends State<TodoListPage>
     super.initState();
 
     IOManager.getCompletedTasks().then((_) => setState(() {}));
+    widget.showRateDialog = User.prefs.getBool('rateDialog');
 
     controller.addListener(()
     {
@@ -36,6 +39,13 @@ class TodoListPageState extends State<TodoListPage>
       {
         setState(() { widget.showSmallProgressBar = false; });
         print(controller.offset);
+      }
+
+      if(widget.showRateDialog != true && controller.offset > 3000)
+      {
+        widget.showRateDialog = true;
+        User.prefs.setBool('rateDialog', true);
+        showDialog(child: new RateDialog(), context: context, barrierDismissible: false);
       }
 
       if(widget.resetState)
