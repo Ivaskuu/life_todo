@@ -98,7 +98,7 @@ class TodoListPageState extends State<TodoListPage>
                     margin: new EdgeInsets.only(right: 16.0),
                     child: new Material
                     (
-                      elevation: 0.0,
+                      elevation: 2.0,
                       shape: new CircleBorder(),
                       child: new CircleAvatar
                       (

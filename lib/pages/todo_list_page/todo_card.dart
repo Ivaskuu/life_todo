@@ -68,7 +68,7 @@ class _TodoCardState extends State<TodoCard>
                       widget.task.done
                       ? new InkWell
                       (
-                        onTap: () => share(User.name + ' has completed ' + widget.task.description + ' in Life Todo!\nDownload it here: https://play.google.com/store/apps/details?id=com.skuu.lifetodo'),
+                        onTap: () => share(User.name + ' has completed ' + widget.task.description + ' in his life!\nDownload it here: https://play.google.com/store/apps/details?id=com.skuu.lifetodo'),
                         child: new Container
                         (
                           margin: new EdgeInsets.only(right: 12.0),

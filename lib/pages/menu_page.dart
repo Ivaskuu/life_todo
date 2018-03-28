@@ -74,16 +74,16 @@ class _MenuPageState extends State<MenuPage>
                 child: new ListTile
                 (
                   title: new Text("My friends", style: new TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.0)),
-                  leading: new Icon(Icons.people, ),
+                  leading: new Icon(Icons.people),
                 ),
               ),
               new FlatButton
               (
-                onPressed: () {  },
+                onPressed: () { showAboutDialog(context: context, applicationLegalese: 'Check the privacy policy at:\n\nhttps://gist.githubusercontent.com/Ivaskuu/9f1891f62189289e7d9a7c31e297a98a/raw/fb813af5940de6fe30efcd8e0a63bca1d4ee7a55/Life%2520todo%2520privacy%2520policy', applicationVersion: 'Beta: v0.2', applicationIcon: new Image.asset('res/icon.png', width: 80.0)); },
                 child: new ListTile
                 (
-                  title: new Text("About", style: new TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0)),
-                  leading: new Icon(Icons.info,),
+                  title: new Text("About", style: new TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20.0)),
+                  leading: new Icon(Icons.info),
                 ),
               ),
             ],
@@ -93,7 +93,7 @@ class _MenuPageState extends State<MenuPage>
             margin: new EdgeInsets.only(bottom: 32.0, left: 32.0, right: 32.0),
             child: new RaisedButton
             (
-              color: Colors.white,
+              color: Colors.pink,
               onPressed: () async
               {
                 User.prefs.setString('userName', null);
@@ -110,24 +110,12 @@ class _MenuPageState extends State<MenuPage>
               },
               child: new ListTile
               (
-                title: new Text("LOGOUT", style: new TextStyle(color: Colors.blueAccent)),
-                trailing: new Icon(Icons.exit_to_app, color: Colors.blueAccent),
+                title: new Text("LOGOUT", style: new TextStyle(color: Colors.white)),
+                trailing: new Icon(Icons.exit_to_app, color: Colors.white),
               )
             )
           )
         ],
-      )
-    );
-  }
-
-  Widget menuButton(String title)
-  {
-    return new InkWell
-    (
-      onTap: () {},
-      child: new ListTile
-      (
-        title: new Text(title, style: new TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 32.0)),
       )
     );
   }
