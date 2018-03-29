@@ -62,94 +62,100 @@ class TodoListPageState extends State<TodoListPage>
     return new Scaffold
     (
       backgroundColor: new Color(0xEEFFFFFF),
-      body: new CustomScrollView
+      body: new Builder
       (
-        controller: controller,
-        scrollDirection: Axis.vertical,
-        slivers: <Widget>
-        [
-          new SliverAppBar
+        builder: (BuildContext context)
+        {
+          return new CustomScrollView
           (
-            automaticallyImplyLeading: false,
-            elevation: 3.0,
-            floating: false,
-            pinned: true,
-            centerTitle: false,
-            backgroundColor: Colors.white,
-            titleSpacing: 0.0,
-            title: new Stack
-            (
-              children: <Widget>
-              [
-                new Align
+            controller: controller,
+            scrollDirection: Axis.vertical,
+            slivers: <Widget>
+            [
+              new SliverAppBar
+              (
+                automaticallyImplyLeading: false,
+                elevation: 3.0,
+                floating: false,
+                pinned: true,
+                centerTitle: false,
+                backgroundColor: Colors.white,
+                titleSpacing: 0.0,
+                title: new Stack
                 (
-                  alignment: FractionalOffset.centerLeft,
-                  child: new Container
-                  (
-                    margin: new EdgeInsets.only(left: 16.0),
-                    child: new Text('Life todo', style: new TextStyle(color: Colors.black, fontSize: 32.0, fontWeight: FontWeight.w600))
-                  ),
-                ),
-                new Align
-                (
-                  alignment: FractionalOffset.centerRight,
-                  child: new Container
-                  (
-                    margin: new EdgeInsets.only(right: 16.0),
-                    child: new Material
+                  children: <Widget>
+                  [
+                    new Align
                     (
-                      elevation: 2.0,
-                      shape: new CircleBorder(),
-                      child: new CircleAvatar
+                      alignment: FractionalOffset.centerLeft,
+                      child: new Container
                       (
-                        radius: 22.0,
-                        backgroundColor: Colors.white,
-                        child: new InkWell
+                        margin: new EdgeInsets.only(left: 16.0),
+                        child: new Text('Life todo', style: new TextStyle(color: Colors.black, fontSize: 32.0, fontWeight: FontWeight.w600))
+                      ),
+                    ),
+                    new Align
+                    (
+                      alignment: FractionalOffset.centerRight,
+                      child: new Container
+                      (
+                        margin: new EdgeInsets.only(right: 16.0),
+                        child: new Material
                         (
-                          onTap: () => Navigator.of(context).push(new MaterialPageRoute(builder: (_) => new MenuPage())),
-                          child: new UserImage()
+                          elevation: 2.0,
+                          shape: new CircleBorder(),
+                          child: new CircleAvatar
+                          (
+                            radius: 22.0,
+                            backgroundColor: Colors.white,
+                            child: new InkWell
+                            (
+                              onTap: () => Scaffold.of(context).openDrawer(),
+                              child: new UserImage()
+                            )
+                          ),
                         )
                       ),
-                    )
+                    ),
+                    widget.showSmallProgressBar ? new Align
+                    (
+                      alignment: FractionalOffset.bottomLeft,
+                      child: new SizedBox.fromSize
+                      (
+                        size: new Size((User.completedTasks.length / TasksList.tasks.length) * MediaQuery.of(context).size.width, 4.0),
+                        child: new Container(color: MyColors.blue),
+                      )
+                    ) : new Container(),
+                  ],
+                ),
+                expandedHeight: 170.0,
+                flexibleSpace: new FlexibleSpaceBar
+                (
+                  background: new Column
+                  (
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[ new ProgressBar(widget) ],
                   ),
                 ),
-                widget.showSmallProgressBar ? new Align
-                (
-                  alignment: FractionalOffset.bottomLeft,
-                  child: new SizedBox.fromSize
-                  (
-                    size: new Size((User.completedTasks.length / TasksList.tasks.length) * MediaQuery.of(context).size.width, 4.0),
-                    child: new Container(color: MyColors.blue),
-                  )
-                ) : new Container(),
-              ],
-            ),
-            expandedHeight: 170.0,
-            flexibleSpace: new FlexibleSpaceBar
-            (
-              background: new Column
-              (
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[ new ProgressBar(widget) ],
               ),
-            ),
-          ),
-          new SliverList
-          (
-            delegate: new SliverChildListDelegate
-            (
-              <Widget>
-              [
-                new Container
+              new SliverList
+              (
+                delegate: new SliverChildListDelegate
                 (
-                  margin: new EdgeInsets.only(right: 18.0, bottom: 8.0, top: 16.0),
-                  child: new Text('Tasks list', textAlign: TextAlign.end, style: new TextStyle(fontWeight: FontWeight.w500)),
-                ),
-                new TasksSection(this)
-              ]
-            )
-          )
-        ],
+                  <Widget>
+                  [
+                    new Container
+                    (
+                      margin: new EdgeInsets.only(right: 18.0, bottom: 8.0, top: 16.0),
+                      child: new Text('Tasks list', textAlign: TextAlign.end, style: new TextStyle(fontWeight: FontWeight.w500)),
+                    ),
+                    new TasksSection(this)
+                  ]
+                )
+              )
+            ],
+          );
+        },
       ),
       drawer: new Drawer
       (
