@@ -122,137 +122,141 @@ class _OnboardPageState extends State<OnboardPage>
     (
       children: <Widget>
       [
-        new SizedBox.expand
+        new Container
         (
-          child: new Container
+          decoration: new BoxDecoration
           (
-            decoration: new BoxDecoration
+            image: new DecorationImage
             (
-              image: new DecorationImage
-              (
-                image: bgImage,
-                fit: BoxFit.cover
-              )
-            ),
-          )
-        ),
-        new Align
-        (
-          alignment: FractionalOffset.topCenter,
-          child: new Container
-          (
-            margin: new EdgeInsets.only(left: 32.0, top: 48.0, right: 16.0),
-            child: new Column
-            (
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>
-              [
-                new Text('Life Todo.', style: new TextStyle(fontWeight: FontWeight.w700, fontSize: 48.0, color: Colors.white)),
-                new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                new Text('Your life checklist ✅', style: new TextStyle(color: Colors.white))
-              ],
+              image: bgImage,
+              fit: BoxFit.cover
             )
-          )
+          ),
         ),
-        new Align
+        new ListView
         (
-          alignment: Alignment.center,
-          child: new Container
-          (
-            margin: new EdgeInsets.symmetric(horizontal: 32.0),
-            child: new Material
+          children: <Widget>
+          [
+            /// Logo
+            new Align
             (
-              elevation: 8.0,
-              child: new Column
-              (
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>
-                [
-                  new SizedBox.fromSize
-                  (
-                    size: new Size.fromHeight(200.0),
-                    child: new Material
-                    (
-                      child: new Stack
-                      (
-                        children: <Widget>
-                        [
-                          new Center
-                          (
-                            child: new UserImage()
-                          ),
-                          new Align
-                          (
-                            alignment: Alignment.topRight,
-                            child: new Container
-                            (
-                              child: new IconButton
-                              (
-                                onPressed: () => getImage(),
-                                icon: new Icon(Icons.add_a_photo),
-                              ),
-                            )
-                          )
-                        ],
-                      )
-                    ),
-                  ),
-                  new Container
-                  (
-                    margin: new EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
-                    child: new TextField
-                    (
-                      controller: controller,
-                      decoration: new InputDecoration.collapsed
-                      (
-                        hintText: 'What\'s your name?'
-                      )
-                    ),
-                  )
-                ],
-              )
-            ) 
-          )
-        ),
-        new Align
-        (
-          alignment: Alignment.center,
-          child: new Container
-          (
-            margin: new EdgeInsets.only(top: 500.0),
-            child: new Material
-            (
-              elevation: 4.0,
+              alignment: FractionalOffset.topCenter,
               child: new Container
               (
-                decoration: new BoxDecoration
+                margin: new EdgeInsets.only(left: 32.0, top: 48.0, right: 16.0),
+                child: new Column
                 (
-                  gradient: new LinearGradient
-                  (
-                    colors: [ Colors.yellow, Colors.red ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight
-                  )
-                ),
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>
+                  [
+                    new Text('Life Todo.', style: new TextStyle(fontWeight: FontWeight.w700, fontSize: 48.0, color: Colors.white)),
+                    new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
+                    new Text('Your life checklist ✅', style: new TextStyle(color: Colors.white))
+                  ],
+                )
+              )
+            ),
+            /// Image and name card
+            new Padding(padding: new EdgeInsets.only(bottom: 32.0)),
+            new Container
+            (
+              margin: new EdgeInsets.symmetric(horizontal: 32.0),
+              child: new Material
+              (
+                elevation: 8.0,
+                child: new Column
+                (
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>
+                  [
+                    new SizedBox.fromSize
+                    (
+                      size: new Size.fromHeight(200.0),
+                      child: new Material
+                      (
+                        child: new Stack
+                        (
+                          children: <Widget>
+                          [
+                            new Center
+                            (
+                              child: new UserImage()
+                            ),
+                            new Align
+                            (
+                              alignment: Alignment.topRight,
+                              child: new Container
+                              (
+                                child: new IconButton
+                                (
+                                  onPressed: () => getImage(),
+                                  icon: new Icon(Icons.add_a_photo),
+                                ),
+                              )
+                            )
+                          ],
+                        )
+                      ),
+                    ),
+                    new Container
+                    (
+                      margin: new EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                      child: new TextField
+                      (
+                        controller: controller,
+                        decoration: new InputDecoration.collapsed(hintText: 'What\'s your name?'),
+                        onChanged: (_) => setState(() {}),
+                        style: new TextStyle(fontSize: 18.0, color: Colors.black),
+                      ),
+                    )
+                  ],
+                )
+              ) 
+            ),
+            /// Continue button
+            new Align
+            (
+              alignment: Alignment.center,
+              child: new Container
+              (
+                margin: new EdgeInsets.only(top: 48.0),
                 child: new Material
                 (
-                  color: Colors.transparent,
-                  child: new InkWell
+                  elevation: controller.text.length >= 4 && controller.text.length <= 10 ? 4.0 : 0.0,
+                  child: new Container
                   (
-                    onTap: () => saveName(controller.text),
-                    child: new Container
+                    decoration: controller.text.length >= 4 && controller.text.length <= 10
+                    ? new BoxDecoration
                     (
-                      margin: new EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-                      child: new Text('CONTINUE', style: new TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.white)),
+                      gradient: new LinearGradient(colors: [ new Color(0xFF0acffe), new Color(0xFF495aff) ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                     )
+                    : new BoxDecoration
+                    (
+                      color: Colors.grey
+                    ),
+                    child: new Material
+                    (
+                      color: Colors.transparent,
+                      child: new InkWell
+                      (
+                        onTap: () => controller.text.length >= 4 && controller.text.length <= 10 ? saveName(controller.text) : null,
+                        child: new Container
+                        (
+                          margin: new EdgeInsets.symmetric(horizontal: 90.0, vertical: 16.0),
+                          child: new Text('CONTINUE', style: new TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.white)),
+                        )
+                      ),
+                    ),
                   ),
-                ),
+                )
               ),
             )
-          )
-        )
+          ].reversed.toList(),
+          shrinkWrap: true,
+          reverse: true,
+        ),
       ]
     );
   }
