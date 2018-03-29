@@ -161,7 +161,7 @@ class TodoListPageState extends State<TodoListPage>
       ),
       drawer: new Drawer
       (
-        child: new MenuPage()
+        child: new MenuPage(this)
       ),
     );
   }

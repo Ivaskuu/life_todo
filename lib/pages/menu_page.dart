@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 import '../user.dart';
 import 'onboard_page.dart';
 import '../misc/user_image.dart';
@@ -10,6 +12,9 @@ import 'package:share/share.dart';
 
 class MenuPage extends StatefulWidget
 {
+  State todoListPageState;
+  MenuPage(this.todoListPageState);
+
   @override
   _MenuPageState createState() => new _MenuPageState();
 }
@@ -86,7 +91,12 @@ class _MenuPageState extends State<MenuPage>
                                   child: new CircleAvatar
                                   (
                                     radius: 42.0,
-                                    child: new UserImage(),
+                                    child: new InkWell
+                                    (
+                                      onTap: () => changeUserImage(),
+                                      onLongPress: () => removeUserImage(),
+                                      child: new UserImage(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -163,5 +173,26 @@ class _MenuPageState extends State<MenuPage>
         )
       ],
     );
+  }
+
+  changeUserImage() async
+  {
+    var _fileName = await ImagePicker.pickImage();
+    User.prefs.setString('userImage', _fileName.path);
+    User.prefs.commit();
+
+    User.userImagePath = _fileName.path;
+    setState(() {});
+    widget.todoListPageState.setState(() {});
+  }
+
+  removeUserImage() async
+  {
+    User.prefs.setString('userImage', null);
+    User.prefs.commit();
+
+    User.userImagePath = null;
+    setState(() {});
+    widget.todoListPageState.setState(() {});
   }
 }

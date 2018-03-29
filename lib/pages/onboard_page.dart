@@ -552,7 +552,7 @@ class _OnboardPageState extends State<OnboardPage>
           new FlatButton
           (
             textColor: Colors.blue,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () { Navigator.pop(context); getImage(); },
             child: new Text("ADD AN IMAGE"),
           ),
           new FlatButton
