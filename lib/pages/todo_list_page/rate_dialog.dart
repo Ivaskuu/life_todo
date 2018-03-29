@@ -3,9 +3,13 @@ import 'package:launch_review/launch_review.dart';
 
 class RateDialog extends StatelessWidget
 {
+  BuildContext buildContext;
+
   @override
   Widget build(BuildContext context)
   {
+    buildContext = context;
+
     return new AlertDialog
     (
       contentPadding: new EdgeInsets.all(0.0),
@@ -60,23 +64,23 @@ class RateDialog extends StatelessWidget
         (
           textColor: Colors.black38,
           onPressed: () => Navigator.of(context).pop(),
-          child: new Text('NEVER ASK ME AGAIN'),
+          child: new Text('NEVER ASK AGAIN'),
         ),
         new FlatButton
         (
           textColor: Colors.blue,
-          onPressed: () { LaunchReview.launch(androidAppId: 'com.skuu.lifetodo'); Navigator.of(context).pop(); showRatedDialog(context); },
+          onPressed: () { LaunchReview.launch(androidAppId: 'com.skuu.lifetodo'); showRatedDialog(); },
           child: new Text('RATE IT'),
         ),
       ],
     );
   }
 
-  void showRatedDialog(BuildContext context)
+  void showRatedDialog()
   {
     showDialog
     (
-      context: context,
+      context: buildContext,
       child: new AlertDialog
       (
         titlePadding: new EdgeInsets.all(0.0),
@@ -94,7 +98,7 @@ class RateDialog extends StatelessWidget
         [
           new FlatButton
           (
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () { Navigator.of(buildContext).pop(); Navigator.of(buildContext).pop(); },
             child: new Text('I AM THE BEST'),
           )
         ],

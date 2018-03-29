@@ -15,7 +15,7 @@ class TodoListPage extends StatefulWidget
 {
   bool showSmallProgressBar = false;
   bool resetState = false;
-  bool showRateDialog = false;
+  bool showRateDialog;
 
   @override
   TodoListPageState createState() => new TodoListPageState();
@@ -41,10 +41,12 @@ class TodoListPageState extends State<TodoListPage>
         print(controller.offset);
       }
 
-      if(widget.showRateDialog != true && controller.offset > 3000)
+      if(widget.showRateDialog == null && controller.offset > 3000)
       {
         widget.showRateDialog = true;
         User.prefs.setBool('rateDialog', true);
+        User.prefs.commit();
+        
         showDialog(child: new RateDialog(), context: context, barrierDismissible: false);
       }
 
@@ -75,7 +77,7 @@ class TodoListPageState extends State<TodoListPage>
               new SliverAppBar
               (
                 automaticallyImplyLeading: false,
-                elevation: 3.0,
+                elevation: 2.0,
                 floating: false,
                 pinned: true,
                 centerTitle: false,
