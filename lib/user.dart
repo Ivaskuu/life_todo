@@ -6,6 +6,7 @@ class User
   static String name;
   static String userImagePath;
   static List<Task> completedTasks = new List();
+  static bool hasShownRateDialog;
 
   static SharedPreferences prefs;
 

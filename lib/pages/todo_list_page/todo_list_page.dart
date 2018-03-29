@@ -15,7 +15,6 @@ class TodoListPage extends StatefulWidget
 {
   bool showSmallProgressBar = false;
   bool resetState = false;
-  bool showRateDialog;
 
   @override
   TodoListPageState createState() => new TodoListPageState();
@@ -31,25 +30,25 @@ class TodoListPageState extends State<TodoListPage>
     super.initState();
 
     IOManager.getCompletedTasks().then((_) => setState(() {}));
-    widget.showRateDialog = User.prefs.getBool('rateDialog');
+    if(User.prefs.getBool('rateDialog') != null) User.hasShownRateDialog = true;
+    else User.hasShownRateDialog = false;
 
     controller.addListener(()
     {
-      if(controller.offset == 0.0)
-      {
-        setState(() { widget.showSmallProgressBar = false; });
-        print(controller.offset);
-      }
+      if(controller.offset == 0.0) setState(() { widget.showSmallProgressBar = false; });
 
-      if(widget.showRateDialog == null && controller.offset > 3000)
+      // Check to show RateDialog
+      if(User.hasShownRateDialog == false && controller.offset > 3000)
       {
-        widget.showRateDialog = true;
+        setState(() => User.hasShownRateDialog = true);
+
         User.prefs.setBool('rateDialog', true);
         User.prefs.commit();
         
         showDialog(child: new RateDialog(), context: context, barrierDismissible: false);
       }
 
+      // The ProgressBar has been updated
       if(widget.resetState)
       {
         setState(() {});

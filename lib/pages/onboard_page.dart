@@ -491,7 +491,6 @@ class _OnboardPageState extends State<OnboardPage>
   {
     if(userName.trim().length > 10 || userName.trim().length < 4)
     {
-      showNameErrorDialog();
       return;
     }
 
@@ -502,40 +501,6 @@ class _OnboardPageState extends State<OnboardPage>
     
     if(User.userImagePath != null) pageController.nextPage(duration: new Duration(milliseconds: 500), curve: Curves.easeInOut);
     else showAskImageDialog();
-  }
-
-  void showNameErrorDialog()
-  {
-    showDialog
-    (
-      context: context,
-      child: new SimpleDialog
-      (
-        contentPadding: new EdgeInsets.all(0.0),
-        children: <Widget>
-        [
-          new Container
-          (
-            margin: new EdgeInsets.all(32.0),
-            child: new Text("Please check the name!", style: Theme.of(context).textTheme.title.copyWith(color: Colors.red), textAlign: TextAlign.center)
-          ),
-          new Container
-          (
-            margin: new EdgeInsets.symmetric(horizontal: 16.0),
-            child: new Text("Make sure that your name\'s length is between 4 and 10 characters.", textAlign: TextAlign.center)
-          ),
-          new Container
-          (
-            margin: new EdgeInsets.all(32.0),
-            child: new FlatButton
-            (
-              textColor: Colors.blue,
-              child: new Text("CHANGE IT"), onPressed: () => Navigator.pop(context)
-            )
-          )
-        ],
-      )
-    );
   }
 
   void showAskImageDialog()
