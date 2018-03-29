@@ -31,6 +31,7 @@ flutter:
    - res/forest.jpg
    - res/user.png
    - res/icon.png
+   - res/activities.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
